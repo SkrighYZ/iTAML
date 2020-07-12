@@ -136,7 +136,7 @@ def main():
         acc_task = main_learner.meta_test(main_learner.best_model, memory, inc_dataset)
         
         for test_task in range(ses+1):
-            Rmatrix[ses, test_task] = acc_task[test_task]
+            Rmatrix[ses, test_task] = round(acc_task[test_task]/100, 3)
         np.save(open('Rmatrix_itaml.npy', 'wb'), Rmatrix)
 
         with open(args.savepoint + "/memory_"+str(args.sess)+".pickle", 'wb') as handle:
