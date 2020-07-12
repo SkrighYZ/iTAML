@@ -97,6 +97,7 @@ def main():
     start_sess = int(sys.argv[1])
     memory = None
     
+    Rmatrix = np.zeros([args.num_task, args.num_task])
     for ses in range(start_sess, args.num_task):
         args.sess=ses 
         
@@ -134,7 +135,10 @@ def main():
         
         acc_task = main_learner.meta_test(main_learner.best_model, memory, inc_dataset)
         
-        
+        for test_task in range(ses+1):
+            Rmatrix[ses, test_task] = acc_task[test_task]
+        np.save(open('Rmatrix_itaml.npy', 'wb'), Rmatrix)
+
         with open(args.savepoint + "/memory_"+str(args.sess)+".pickle", 'wb') as handle:
             pickle.dump(memory, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
