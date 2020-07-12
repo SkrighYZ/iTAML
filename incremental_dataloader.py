@@ -342,10 +342,18 @@ class iCIFAR10(DataHandler):
 
 class iCIFAR100(DataHandler):
     base_dataset = datasets.cifar.CIFAR100
+    class_order = [  # Taken from original iCaRL implementation:
+        87, 0, 52, 58, 44, 91, 68, 97, 51, 15, 94, 92, 10, 72, 49, 78, 61, 14, 8, 86, 84, 96, 18,
+        24, 32, 45, 88, 11, 4, 67, 69, 66, 77, 47, 79, 93, 29, 50, 57, 83, 17, 81, 41, 12, 37, 59,
+        25, 20, 80, 73, 1, 28, 6, 46, 62, 82, 53, 9, 31, 75, 38, 63, 33, 74, 27, 22, 36, 3, 16, 21,
+        60, 19, 70, 90, 89, 43, 5, 42, 65, 76, 40, 30, 23, 85, 2, 95, 56, 48, 71, 64, 98, 13, 99, 7,
+        34, 55, 54, 26, 35, 39
+    ]
     train_transforms = [
         transforms.RandomCrop(32, padding=4),
         transforms.RandomHorizontalFlip(),
-        transforms.RandomRotation(10),
+        #transforms.RandomRotation(10),
+        transforms.ColorJitter(brightness=63 / 255)
         transforms.ToTensor(),
         transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761)),
     ]

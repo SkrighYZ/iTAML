@@ -35,16 +35,16 @@ class args:
     num_task = 10
     test_samples_per_class = 100
     dataset = "cifar100"
-    optimizer = "radam"
+    optimizer = "sgd"
     
-    epochs = 70
-    lr = 0.01
+    epochs = 160
+    lr = 0.1
     train_batch = 128
     test_batch = 100
     workers = 16
     sess = 0
-    schedule = [20,40,60]
-    gamma = 0.2
+    schedule = [80, 120]
+    gamma = 0.1
     random_classes = False
     validation = 0
     memory = 2000
